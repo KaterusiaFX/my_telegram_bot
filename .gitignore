@@ -3,3 +3,4 @@
 *.log
 info_tel_bot_sozvezdie.odt
 settings.py
+/__pycache__

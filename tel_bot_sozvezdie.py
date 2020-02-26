@@ -65,10 +65,23 @@ def talk_to_me(bot, update):
 
 # ф-я для обработки команды "planet" с помощью модуля ephem
 def planet_f(bot, update):
+    # Словарь с названиями планет и соотв-ми им параметрами для ephem
+    planets = {'Mars': ephem.Mars, 'Mercury': ephem.Mercury, 'Venus': ephem.Venus, 'Jupiter': ephem.Jupiter,
+               'Saturn': ephem.Saturn,
+               'Uranus': ephem.Uranus, 'Neptune': ephem.Neptune, 'Pluto': ephem.Pluto, 'Sun': ephem.Sun,
+               'Moon': ephem.Moon
+               }
     text = 'Вызвана команда /planet'
     print(text)  # при вызове команды planet пользователем в консоли появится сообще-е: Вызвана команда /planet
-
-
+    user_planet = update.message.text.split() # в user_planet кладем список из '/planet' и 'название планеты'
+    print(user_planet)
+    planet_name = user_planet[1] # в planet_name кладем название планеты из списка user_planet
+    print(planet_name)
+    planet_method = planets[planet_name]
+    print(planet_method)
+    planet_constellation = planet_method(ephem.now())
+    print(planet_constellation)
+    update.message.reply_text('planet_constellation')
 
 
 # Вызываем функцию - эта строчка собственно запускает бота
