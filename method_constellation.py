@@ -6,5 +6,9 @@ planets = {'Mars': ephem.Mars, 'Mercury': ephem.Mercury, 'Venus': ephem.Venus, '
 
 planet_name = 'Venus' # подставить сюда из сообщения пользователя
 planet_method = planets[planet_name] # из словаря по ключу 'Venus' - ephem.Venus
-planet_constellation = planet_method(ephem.now()) # к 'Ven
+constellation1 = planet_method(ephem.now())
+planet_constellation = ephem.constellation(constellation1) # к 'Ven
 print(planet_constellation)
+
+
+

@@ -9,6 +9,7 @@ import logging # импорт модуля logging, отвечает за лог
 import ephem # модуль для определения в каком созвездии находится планета на определенную дату
 import settings
 
+
 # Настройки прокси: создаем переменную PROXY, присваиваем ей словарь
 PROXY = {'proxy_url': 'socks5://t1.learn.python.ru:1080', # по ключу proxy_url лежит ссылка на прокси
          'urllib3_proxy_kwargs': {'username': 'learn', 'password': 'python'}} # по ключу urllib3... лежит словрь с именем пользователя и паролем
@@ -74,14 +75,11 @@ def planet_f(bot, update):
     text = 'Вызвана команда /planet'
     print(text)  # при вызове команды planet пользователем в консоли появится сообще-е: Вызвана команда /planet
     user_planet = update.message.text.split() # в user_planet кладем список из '/planet' и 'название планеты'
-    print(user_planet)
     planet_name = user_planet[1] # в planet_name кладем название планеты из списка user_planet
-    print(planet_name)
-    planet_method = planets[planet_name]
-    print(planet_method)
-    planet_constellation = planet_method(ephem.now())
-    print(planet_constellation)
-    update.message.reply_text('planet_constellation')
+    planet_method = planets[planet_name] # в planet_method - значение ephem по ключу название планеты
+    constellation1 = planet_method(ephem.now()) # применяем метод ephem.now к ephem.планета
+    planet_constellation = ephem.constellation(constellation1) # примен. метод constellation
+    update.message.reply_text(planet_constellation) # вывод результата сообщением от бота
 
 
 # Вызываем функцию - эта строчка собственно запускает бота
